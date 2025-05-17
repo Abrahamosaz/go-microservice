@@ -1,8 +1,28 @@
 version: "3"
 
 services:
+  caddy:
+    image: abrahamosaz/micro-caddy:1.0.0
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+  front-end:
+    image: abrahamosaz/front-end:1.0.1
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      - BROKER_URL=http://backend
+
   broker-service:
-    image: abrahamosaz/broker-service:1.0.0
+    image: abrahamosaz/broker-service:1.0.2
     ports:
       - "5000:5000"
     deploy:
@@ -24,7 +44,7 @@ services:
       - DSN=postgres://ab:abraham@auth-postgres:5432/auth_db?sslmode=disable
 
   logger-service:
-    image: abrahamosaz/logger-service:1.0.0
+    image: abrahamosaz/logger-service:1.0.1
     deploy:
       mode: replicated
       replicas: 1
@@ -91,3 +111,7 @@ services:
     volumes:
       - ./db-data/auth-postgres:/var/lib/postgresql/data
 
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
