@@ -16,8 +16,8 @@ const webPort = "5003"
 
 
 type Config struct {
-	DB *sql.DB
-	Models data.Models
+	Repo data.Repository
+	Client *http.Client
 }
 
 
@@ -32,8 +32,8 @@ func main() {
 	
 	
 	app := Config{
-		DB: conn,
-		Models: data.New(conn),
+		Repo: data.NewPostgresRepository(conn),
+		Client: &http.Client{},
 	}
 
 

@@ -66,12 +66,6 @@ services:
       MAIL_FROM_NAME: "Abraham"
       MAIL_FROM_ADDRESS: "abraham@gmail.com"
 
-  auth-postgres:
-    image: postgres:13
-    deploy:
-      mode: replicated
-      replicas: 1
-
   rabbitmq:
     image: "rabbitmq:4.1.0-alpine"
     deploy:

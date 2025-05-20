@@ -71,7 +71,7 @@
             body: JSON.stringify(payload)
         }
 
-        fetch("http://localhost:5000/handle", body)
+        fetch({{print .BrokeURL "/handle"}}, body)
             .then(response => response.json())
             .then(data => {
                 sent.innerHTML = JSON.stringify(payload, undefined, 4);
@@ -109,7 +109,7 @@
             body: JSON.stringify(payload)
         }
 
-        fetch("http://localhost:5000/log-grpc", body)
+        fetch({{print .BrokeURL "/log-grpc"}}, body)
             .then(response => response.json())
             .then(data => {
                 sent.innerHTML = JSON.stringify(payload, undefined, 4);
@@ -146,7 +146,7 @@
             body: JSON.stringify(payload)
         }
 
-        fetch("http://localhost:5000/handle", body)
+        fetch({{print .BrokeURL "/handle"}}, body)
             .then(response => response.json())
             .then(data => {
                 sent.innerHTML = JSON.stringify(payload, undefined, 4);
@@ -184,7 +184,7 @@
             body: JSON.stringify(payload)
         }
 
-        fetch("http://localhost:5000/handle", body)
+        fetch({{print .BrokeURL "/handle"}}, body)
             .then(response => response.json())
             .then(data => {
                 sent.innerHTML = JSON.stringify(payload, undefined, 4);
@@ -209,7 +209,7 @@
             method: "POST"
         }
 
-        fetch("http://localhost:5000")
+        fetch({{.BrokeURL}})
             .then(response => response.json())
             .then(data => {
                 sent.innerHTML = "empty post request";
